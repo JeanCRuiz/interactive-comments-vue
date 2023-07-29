@@ -1,0 +1,105 @@
+@import 'normalize.css';
+
+:root {
+  /*  Primary */
+
+  --Moderate-blue: hsl(238, 40%, 52%);
+  --Soft-Red: hsl(358, 79%, 66%);
+  --Light-Grayish-Blue: hsl(239, 57%, 85%);
+  --Pale-Red: hsl(357, 100%, 86%);
+
+  /*  Neutral */
+  --Dark-Blue: hsl(212, 24%, 26%);
+  --Grayish-Blue: hsl(211, 10%, 45%);
+  --Light-Gray: hsl(223, 19%, 93%);
+  --Very-Light-Gray: hsl(228, 33%, 97%);
+  --White: hsl(0, 0%, 100%);
+
+  /*  Font Weigth */
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-700: 700;
+}
+
+/* Only screen readers */
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: var(--Very-Light-Gray);
+}
+
+/* Comments styles */
+
+.container {
+  background-color: var(--White);
+  border-radius: 0.5rem;
+  padding-inline: 1rem;
+  padding-block: 1rem;
+
+  display: grid;
+  align-items: center;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    'header header'
+    'main main'
+    'score button';
+  gap: 1rem;
+}
+
+.container-header {
+  grid-area: header;
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.wrapper-img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.wrapper-username {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--Dark-Blue);
+}
+
+.wrapper-createdAt {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--Grayish-Blue);
+}
+
+.comment {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--Grayish-Blue);
+  line-height: 1.5;
+  grid-area: main;
+}
+
+
+
+@media screen and (min-width: 45.625em) {
+  .container {
+    grid-template-areas:
+    'score header button'
+    'score main main';
+  }
+}
