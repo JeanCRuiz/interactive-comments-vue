@@ -52,6 +52,7 @@ export const useCommentStore = defineStore("commentStore", {
     scrollToLastReply() {
       const lastReply = document.querySelector("#replies").lastElementChild;
       lastReply.scrollIntoView({ behavior: "smooth" });
+      console.log("Hello");
     },
   },
 });
