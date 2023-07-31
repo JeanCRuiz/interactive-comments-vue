@@ -1,21 +1,13 @@
 <template>
   <section id="comments" :class="$style.comments">
-    <div
-      :class="$style['grid-layout']"
-      v-for="comment in comments"
-      :key="comment.id"
-    >
+    <div :class="$style['grid-layout']" v-for="comment in comments" :key="comment.id">
       <article class="container" :class="$style.container">
         <header class="container-header">
           <div class="header-wrapper">
-            <img class="wrapper-img" :src="comment.user.image.webp" alt="" />
+            <img class="wrapper-img" :src="comment.user.image.webp" alt="Comment user avatar" />
             <h2 class="wrapper-username">
               {{ comment.user.username }}
-              <span
-                class="you"
-                v-if="comment.user.username === currentUser.username"
-                >you</span
-              >
+              <span class="you" v-if="comment.user.username === currentUser.username">you</span>
             </h2>
             <span class="wrapper-createdAt">{{ comment.createdAt }}</span>
           </div>
@@ -26,9 +18,12 @@
           </p>
         </main>
         <Score :score="comment.score" :id="comment" />
-        <ButtonAction />
+        <ButtonAction :currentUsername="comment.user.username" @toogleFormReply="toogleFormReply(comment.id)" />
       </article>
-      <Reply v-if="comment.replies.length > 0" :replies="comment.replies" />
+      <div :class="$style.testing" v-if="comment.replies.length">
+        <FormReply v-show="showForm && currentCommentId === comment.id" :tag="comment.user.username" />
+        <Reply v-if="comment.replies.length > 0" :replies="comment.replies" :tag="comment.user.username" />
+      </div>
       <div v-if="comment.replies.length > 0" :class="$style.line"></div>
     </div>
   </section>
@@ -38,6 +33,7 @@
 import Score from './Score.vue';
 import ButtonAction from './ButtonAction.vue';
 import Reply from './Reply.vue';
+import FormReply from './FormReply.vue';
 
 import { mapState } from 'pinia';
 import { useCommentStore } from '../store';
@@ -48,14 +44,36 @@ export default {
     Score,
     ButtonAction,
     Reply,
+    FormReply
+  },
+  data() {
+    return {
+      showForm: false,
+      currentCommentId: null
+    }
   },
   computed: {
     ...mapState(useCommentStore, ['currentUser', 'comments', 'calculateDate']),
   },
+  methods: {
+    toogleFormReply(commentId) {
+      this.showForm = this.currentCommentId === commentId ? false : true
+      this.currentCommentId = commentId
+    }
+  }
 };
 </script>
 
 <style module>
+.testing {
+  display: flex;
+  flex-direction: column;
+
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  gap: 1.5rem;
+}
+
 .grid-layout {
   display: grid;
 
