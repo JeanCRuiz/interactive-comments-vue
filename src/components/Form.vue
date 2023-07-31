@@ -1,16 +1,7 @@
 <template>
   <form :class="$style.wrapper" @submit.prevent="handleSubmit">
-    <img
-      class="wrapper-img"
-      :src="currentUser.image.webp"
-      alt="current user avatar"
-    />
-    <textarea
-      placeholder="Add a comment..."
-      rows="4"
-      :class="$style['comment-box']"
-      v-model="content"
-    ></textarea>
+    <img class="wrapper-img" :src="currentUser.image.webp" alt="current user avatar" />
+    <textarea placeholder="Add a comment..." rows="4" :class="$style['comment-box']" v-model="content"></textarea>
     <button :class="$style['send-btn']">Send</button>
   </form>
 </template>

@@ -36,18 +36,19 @@ export const useCommentStore = defineStore("commentStore", {
       const lastComment = document.querySelector("#comments").lastElementChild;
       lastComment.scrollIntoView({ behavior: "smooth" });
     },
-    // async addReply(comment, reply) {
-    //   const newReply = {
-    //     id: currentId(data),
-    //     createdAt: dateFormatted(new Date()),
-    //     user: this.currentUser,
-    //     score: 0,
-    //     content: reply,
-    //   };
-    //   await comment.replies.push(newReply);
-    //   reply = "";
-    //   this.scrollToLastReply();
-    // },
+    async addReply(comment, reply, showForm) {
+      const newReply = {
+        id: currentId(data),
+        createdAt: dateFormatted(new Date()),
+        user: this.currentUser,
+        score: 0,
+        content: reply,
+      };
+      await comment.replies.push(newReply);
+      reply = "";
+      showForm = false;
+      // this.scrollToLastReply();
+    },
     // // When a reply is added, scroll to the last reply added
     // scrollToLastReply() {
     //   const lastReply = document.querySelector("#replies").lastElementChild;

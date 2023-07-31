@@ -1,9 +1,7 @@
 <template>
-    <form :class="$style.wrapper">
+    <form :class="$style.wrapper" @submit.prevent="addReply(comment, content)">
         <img class="wrapper-img" :src="currentUser.image.webp" alt="current user avatar" />
-        <textarea rows="4" :class="$style['comment-box']" v-model="content">
-            {{ tag }}
-        </textarea>
+        <textarea rows="4" :class="$style['comment-box']" v-model="content"></textarea>
         <button :class="$style['send-btn']">Send</button>
     </form>
 </template>
@@ -16,21 +14,21 @@ export default {
     name: 'FormReply',
     data() {
         return {
-            content: `@${this.tag}`,
+            content: '',
         };
     },
     props: {
-        tag: {
-            type: String,
+        comment: {
+            type: Object,
             required: true
-
-        }
+        },
+        
     },
     computed: {
         ...mapState(useCommentStore, ['currentUser']),
     },
     methods: {
-        ...mapActions(useCommentStore, ['addComment']),
+        ...mapActions(useCommentStore, ['addReply']),
         handleSubmit() {
             this.addComment(this.content);
             this.content = '';

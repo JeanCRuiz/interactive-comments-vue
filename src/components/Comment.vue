@@ -20,9 +20,9 @@
         <Score :score="comment.score" :id="comment" />
         <ButtonAction :currentUsername="comment.user.username" @toogleFormReply="toogleFormReply(comment.id)" />
       </article>
-      <div :class="$style.testing" v-if="comment.replies.length">
-        <FormReply v-show="showForm && currentCommentId === comment.id" :tag="comment.user.username" />
-        <Reply v-if="comment.replies.length > 0" :replies="comment.replies" :tag="comment.user.username" />
+      <div :class="$style.testing">
+        <FormReply v-show="showForm && currentCommentId === comment.id" :comment="comment" />
+        <Reply v-if="comment.replies.length > 0" :replies="comment.replies" />
       </div>
       <div v-if="comment.replies.length > 0" :class="$style.line"></div>
     </div>
@@ -57,8 +57,10 @@ export default {
   },
   methods: {
     toogleFormReply(commentId) {
-      this.showForm = this.currentCommentId === commentId ? false : true
+      this.showForm = this.currentCommentId === commentId ? !this.showForm : true
       this.currentCommentId = commentId
+
+      console.log(commentId, this.showForm, this.currentCommentId)
     }
   }
 };
