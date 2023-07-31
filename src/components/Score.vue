@@ -14,24 +14,23 @@
 
 <script>
 import { useCommentStore } from '../store';
-import { mapActions } from 'pinia'
+import { mapActions } from 'pinia';
 
 export default {
   name: 'Score',
   props: {
     score: {
       type: Number,
-      required: true
+      required: true,
     },
     id: {
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    ...mapActions(useCommentStore, ['upvote', 'downvote'])
+    ...mapActions(useCommentStore, ['upvote', 'downvote']),
   },
-
-}
+};
 </script>
 
 <style scoped>
@@ -48,7 +47,6 @@ export default {
 }
 
 button {
-
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -56,7 +54,6 @@ button {
   align-items: center;
   padding-inline: 0.7rem;
   padding-block: 0.7rem;
-
 }
 
 .score {
@@ -67,11 +64,9 @@ button {
 
 @media screen and (min-width: 45.625em) {
   .score-container {
+    width: 2.5rem;
     flex-direction: column;
-    /* padding-inline: 0.938rem;
-    padding-block: 0.75rem; */
-    justify-self: start;
+    align-self: flex-start;
   }
 }
 </style>
-

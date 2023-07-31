@@ -1,12 +1,4 @@
 export const dateFormatted = (date) => {
-  //   const dateObj = new Date(date);
-
-  //   return `${dateObj.getDate()}/${
-  //     dateObj.getMonth() + 1
-  //   }/${dateObj.getFullYear()}`;
-
-  //   const today = new Date(date);
-
   const dateFormatted = date.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'short',

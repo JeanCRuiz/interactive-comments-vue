@@ -18,30 +18,40 @@ export const useCommentStore = defineStore('commentStore', {
 
       return id.score--;
     },
-    addComment(comment) {
-      return this.comments.push({
+    async addComment(comment) {
+      const newComment = {
         id: currentId(data),
         createdAt: dateFormatted(new Date()),
         user: this.currentUser,
         score: 0,
         content: comment,
         replies: [],
-      });
+      };
+      await this.comments.push(newComment);
+      comment = '';
+      this.scrollToLastComment();
     },
+    // When a comment is added, scroll to the last comment added
+    scrollToLastComment() {
+      const lastComment = document.querySelector('#comments').lastElementChild;
+      lastComment.scrollIntoView({ behavior: 'smooth' });
+    },
+    // async addReply(comment, reply) {
+    //   const newReply = {
+    //     id: currentId(data),
+    //     createdAt: dateFormatted(new Date()),
+    //     user: this.currentUser,
+    //     score: 0,
+    //     content: reply,
+    //   };
+    //   await comment.replies.push(newReply);
+    //   reply = '';
+    //   this.scrollToLastReply();
+    // },
+    // // When a reply is added, scroll to the last reply added
+    // scrollToLastReply() {
+    //   const lastReply = document.querySelector('#replies').lastElementChild;
+    //   lastReply.scrollIntoView({ behavior: 'smooth' });
+    // },
   },
-  // getters: {
-  //   calculateDate(date) {
-  //     const today = new Date();
-
-  //     if (date === today) {
-  //       return 'Today';
-  //     } else if (data.getDate() - today.getDate() === 1) {
-  //       return '1 day ago';
-  //     } else if (data.getDate() - today.getDate() > 1) {
-  //       return `${data.getDate() - today.getDate()} days ago`;
-  //     } else {
-  //       return 'More tan a week ago';
-  //     }
-  //   },
-  // },
 });

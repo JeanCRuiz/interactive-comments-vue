@@ -16,7 +16,7 @@ export default {
   name: 'App',
   components: {
     Comment,
-    Form
+    Form,
   },
 };
 </script>
@@ -25,8 +25,11 @@ export default {
 .main {
   width: calc(100% - 2rem);
   max-width: 45.625rem;
+  /* height: 100vh; */
   margin-inline: auto;
-  margin-block: 2rem;
+  /* margin-block: 2rem; */
+  padding-block-start: 4rem;
+  /* position: relative; */
   /* background-color: red; */
   /* just testing ⬇️ */
   /* min-height: 100vh; */

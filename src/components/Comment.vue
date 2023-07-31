@@ -1,5 +1,5 @@
 <template>
-  <section :class="$style.comments">
+  <section id="comments" :class="$style.comments">
     <div
       :class="$style['grid-layout']"
       v-for="comment in comments"
@@ -9,7 +9,14 @@
         <header class="container-header">
           <div class="header-wrapper">
             <img class="wrapper-img" :src="comment.user.image.webp" alt="" />
-            <h2 class="wrapper-username">{{ comment.user.username }}</h2>
+            <h2 class="wrapper-username">
+              {{ comment.user.username }}
+              <span
+                class="you"
+                v-if="comment.user.username === currentUser.username"
+                >you</span
+              >
+            </h2>
             <span class="wrapper-createdAt">{{ comment.createdAt }}</span>
           </div>
         </header>
@@ -43,14 +50,8 @@ export default {
     Reply,
   },
   computed: {
-    ...mapState(useCommentStore, ['comments', 'calculateDate']),
+    ...mapState(useCommentStore, ['currentUser', 'comments', 'calculateDate']),
   },
-  // mounted() {
-  //   console.log(this.comments);
-  //   console.log(this.comments[0].user.image.png);
-  //   this.comments.map((comment) => console.log(comment));
-  //   console.log(this.comments[1].replies);
-  // },
 };
 </script>
 
@@ -59,7 +60,6 @@ export default {
   display: grid;
 
   grid-template-columns: 5% auto;
-  grid-template-rows: repeat(2, auto);
 
   row-gap: 1.25rem;
 }
@@ -78,6 +78,12 @@ export default {
   display: flex;
   flex-direction: column;
   row-gap: 1.25rem;
+  height: 70vh;
+  overflow-y: auto;
+}
+
+.comments p {
+  word-break: break-all;
 }
 
 @media screen and (min-width: 45.625em) {

@@ -1,5 +1,5 @@
 <template>
-  <form :class="$style.wrapper" @submit.prevent="addComment(content)">
+  <form :class="$style.wrapper" @submit.prevent="handleSubmit">
     <img
       class="wrapper-img"
       :src="currentUser.image.webp"
@@ -11,9 +11,7 @@
       :class="$style['comment-box']"
       v-model="content"
     ></textarea>
-    <button :class="$style['send-btn']" :disabled="content.length <= 0">
-      Send
-    </button>
+    <button :class="$style['send-btn']">Send</button>
   </form>
 </template>
 
@@ -32,19 +30,16 @@ export default {
   },
   methods: {
     ...mapActions(useCommentStore, ['addComment']),
+    handleSubmit() {
+      this.addComment(this.content);
+      this.content = '';
+    },
   },
-  // mounted() {
-  //     console.log(this.currentUser)
-  //     console.log('component')
-  //     console.log(this.addComment)
-
-  // }
 };
 </script>
 
 <style module>
 .wrapper {
-  /* height: 11.813rem; */
   background-color: var(--White);
   border-radius: 0.5rem;
   padding-inline: 1rem;
